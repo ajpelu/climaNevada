@@ -1,0 +1,173 @@
+---
+title: "Clima Nevada"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+library("flexdashboard")
+library("tidyverse")
+library("here")
+library("leaflet")
+library("leafletR")
+library("sf")
+library("raster")
+```
+
+
+```{r}
+# stations, network and variables
+stations <- read_tsv(here::here("./data/cn_stations.tsv"))
+net <- read_tsv(here::here("./data/cn_network.tsv"))
+variables <- read_tsv(here::here("./data/cn_variables.tsv"))
+
+
+s <- stations %>% 
+  inner_join(net, by = c("cn_network_id" = "network_id")) %>% 
+  st_as_sf(coords = c("coord_x", "coord_y"), crs = 25830) %>% 
+  st_transform(crs=4326) 
+
+s <- cbind(s, st_coordinates(s)) %>% 
+  rename("lng" = "X", "lat" = "Y") 
+  
+
+df <- s %>% st_drop_geometry()
+```
+
+
+
+
+
+```{r}
+m <- leaflet(df) %>% addTiles()
+
+    
+
+m %>% addMarkers(popup= ~paste("Hola mundo", size)) 
+
+
+```
+
+
+
+
+
+
+
+```{r}
+mydsn = paste0('/Users/', machine, '/Google Drive/carto_public/EENNPP/InfGeografica/InfVectorial/Shapes/ED50_30')
+enp <- readOGR(dsn=mydsn, layer = 'EENNPP', encoding="UTF-8", verbose = FALSE)
+# proj4string(enp) <- CRS("+init=epsg:23030")
+enp_r <- spTransform(enp, CRS("+init=epsg:4326"))
+
+# Select Sierra Nevada 
+sn <- subset(enp_r, NOMBRE == 'SIERRA NEVADA' & FIGURA == 'Espacio Natural')
+sn_nat <- subset(enp_r, NOMBRE == 'SIERRA NEVADA' & FIGURA == 'Parque Nacional')
+
+
+```
+
+
+
+
+
+
+### Distribution of Climate Stations
+
+```{r}
+# Extent of map 
+# Set spatial extent 
+# myext <- extent(s)
+
+# popup_station <- paste0("<strong>Code:</strong> ", s$station_code,
+#                         "<br><strong>Name:</strong> ", s$station_name,
+#                         "<br><strong>Status:</strong> ",  s$status,
+#                         # "<br><strong>N records:</strong> ",  sp_station@data$numero_registros, 
+#                         "<br><strong>Start date:</strong> ",  s$record_start,
+#                         "<br><strong>End date:</strong> ",  s$record_start
+#                         )
+
+
+
+
+# mipal <- colorFactor(palette = c("purple", "blue"), levels = levels(sp_station@data$estado))
+
+leaflet() 
+#   fitBounds(myext@xmin, myext@ymin, myext@xmax, myext@ymax) %>% 
+  addProviderTiles("Esri.WorldImagery")
+
+# %>% 
+  addCircleMarkers(s) 
+
+# %>%
+#   addCircleMarkers(sr_station@data,
+#              lng=sr_station@coords[, 'X_COORD'],
+#              lat=sr_station@coords[,'Y_COORD'],
+#              group = "Estaciones REDIAM", color = "red", 
+#             # color = ~ mipal(sp_station@data$estado),
+#              radius = 6, stroke = FALSE, fillOpacity = 0.7)
+
+
+
+            lng=s@coords[, 'coords.x1'],
+           lat=s@coords[,'coords.x2']) 
+  
+  
+ group= "Meteorological stations / sensors"
+group='Satellite'
+  
+  addWMSTiles('http://www.ideandalucia.es/wms/mdt_2005?',
+              layers = 'Sombreado_10',
+              options = WMSTileOptions(format = "image/png", transparent = TRUE),
+              attribution = '<a href="http://www.juntadeandalucia.es/institutodeestadisticaycartografia" target="_blank">Instituto de Estadística y Cartografía de Andalucía</a>', 
+              group = 'Hillshade') %>% 
+  
+
+
+
+
+%>% 
+  addTiles(urlTemplate = "http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+           attribution = '<a href="https://carto.com/attributions">CARTO</a>',
+           group = 'Basemap') %>% 
+  
+
+  addWMSTiles('http://www.ideandalucia.es/services/toporaster10/wms?',
+              layers = 'toporaster10',
+              options = WMSTileOptions(format = "image/png", transparent = FALSE),
+              attribution = '<a href="http://www.juntadeandalucia.es/institutodeestadisticaycartografia" target="_blank">Instituto de Estadística y Cartografía de Andalucía</a>',
+              group = 'Topographical') %>%
+  addProviderTiles("Esri.WorldImagery", group='Satellite') %>% 
+  addProviderTiles("HikeBike.HillShading", group='Hillshade2') %>% 
+  addLayersControl(position = 'bottomright',
+                   baseGroups = c("Hillshade", "Satellite", "Basemap", "Topographical"),
+                   overlayGroups = c('Meteorological stations / sensors'), # "c('Natural Protected Area', 'Estaciones (OBSNEV)'), #'Estaciones REDIAM'), 
+                   options = layersControlOptions(collapsed = FALSE)) %>% 
+
+
+ # addPolylines(data=sn, color='red', group='Natural Protected Area', weight= 3) %>% 
+  addCircleMarkers(s@data, group= "Meteorological stations / sensors", 
+            lng=s@coords[, 'coords.x1'],
+           lat=s@coords[,'coords.x2']) 
+  
+  
+  
+  
+          
+# color = ~ mipal(sp_station@data$estado),
+          radius = 6, stroke = FALSE, fillOpacity = 0.7, popup = popup_station)
+
+# %>%
+#   addCircleMarkers(sr_station@data,
+#              lng=sr_station@coords[, 'X_COORD'],
+#              lat=sr_station@coords[,'Y_COORD'],
+#              group = "Estaciones REDIAM", color = "red", 
+#             # color = ~ mipal(sp_station@data$estado),
+#              radius = 6, stroke = FALSE, fillOpacity = 0.7)
+``` 
+
+
+ 

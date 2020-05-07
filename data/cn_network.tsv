@@ -1,0 +1,18 @@
+network_id	network_code	network_name	network_manager	network_status	data_policy	url
+1	EARM	Red de Estaciones Automáticas y Remotas de Meteorología	Consejería de Medio Ambiente y Ordenación del Territorio			http://www.juntadeandalucia.es/medioambiente/servtc5/sica/redes/redEspecifica.jsp?c_red=EARM
+2	SECUND	Red de Estaciones Secundarias AEMET	Agencia Estatal de Meteorología			http://www.juntadeandalucia.es/medioambiente/servtc5/sica/redes/redEspecifica.jsp?c_red=SECUND
+3	EMA	Red de Estaciones Meteorológicas Automáticas AEMET	Agencia Estatal de Meteorología			http://www.juntadeandalucia.es/medioambiente/servtc5/sica/redes/redEspecifica.jsp?c_red=EMA
+4	PRINCIP	Red de Estaciones Principales AEMET	Agencia Estatal de Meteorología			http://www.juntadeandalucia.es/medioambiente/servtc5/sica/redes/redEspecifica.jsp?c_red=PRINCIP
+5	SIVA	Red del Servicio de Calidad Ambiental	Consejería de Medio Ambiente			http://www.juntadeandalucia.es/medioambiente/servtc5/sica/redes/redEspecifica.jsp?c_red=SIVA
+6	RIA	Red de Información Agroclimática de Andalucía	Consejería de Medio Ambiente			https://www.juntadeandalucia.es/agriculturaypesca/ifapa/ria/servlet/FrontController
+7	RAIF	Red de Alerta e Información Fitosanitaria	Consejería de Medio Ambiente			https://www.juntadeandalucia.es/agriculturapescaydesarrollorural/raif
+8	ENPSN	Red del Espacio Natural Protegido de Sierra Nevada	Espacio Natural Protegido de Sierra Nevada			http://www.juntadeandalucia.es/medioambiente/servtc5/sica/redes/redEspecifica.jsp?c_red=ENPSN
+9	GLORIA	Red del Proyecto GLORIA	Proyecto GLORIA			https://www.gloria.ac.at/home
+10	CETURSA	Red de Cetursa Sierra Nevada	Centros Turísticos, S.A.			http://www.juntadeandalucia.es/medioambiente/servtc5/sica/redes/redEspecifica.jsp?c_red=CETURSA
+11	PG	Red del Proyecto Guadalfeo	Grupo de Dinámica Fluvial e Hidrológica. Universidad de Córdoba			
+12	RCG	Red de Seguimiento del Cambio Global en Parques Nacionales	Organismo Autónomo Parques Nacionales			https://www.miteco.gob.es/es/red-parques-nacionales/red-seguimiento/infraestructura.aspx
+13	CMA	Red de la Cuenca Mediterránea Andaluza	Consejería de Medio Ambiente y Ordenación del Territorio			http://www.juntadeandalucia.es/medioambiente/servtc5/sica/redes/redEspecifica.jsp?c_red=CMA
+14	CHG	Red de la Confederación Hidrográfica del Guadalquivir	Ministerio de Agricultura, Alimentación y Medio Ambiente.			http://www.juntadeandalucia.es/medioambiente/servtc5/sica/redes/redEspecifica.jsp?c_red=CHG
+15	CHG_SAIH	Red SAIH de las Cuencas del Guadalquivir, Guadalete y Barbate	Ministerio de Agricultura, Alimentación y Medio Ambiente			http://www.juntadeandalucia.es/medioambiente/servtc5/sica/redes/redEspecifica.jsp?c_red=CHG_SAIH
+16	HSUR_SAIH	Red SAIH de la Cuenca Mediterránea Andaluza (Hidrosur)	Consejería de Medio Ambiente y Ordenación del Territorio.			http://www.juntadeandalucia.es/medioambiente/servtc5/sica/redes/redEspecifica.jsp?c_red=HSUR_SAIH
+17	SERN	Red del Servicio de Evaluación de los Recursos Naturales	Consejería de Medio Ambiente			http://www.juntadeandalucia.es/medioambiente/servtc5/sica/redes/redEspecifica.jsp?c_red=SERN

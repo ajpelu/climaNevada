@@ -1,0 +1,87 @@
+variable_code	variable_id	variable_name	variable_units	variable_type
+CI1	1	Visibilidad	M	Visibilidad
+ED1	2	Evaporación total diaria en evaporímetro Piche	mm	Evaporación
+ED2	3	Evaporación total diaria en tanque	mm	Evaporación
+ED3	4	Temperatura máxima del agua del tanque	ºC	Temperatura
+ED4	5	Temperatura mínima del agua del tanque	ºC	Temperatura
+ETD1	6	Evapotranspiración potencial diaria en lisímetro	mm	Evapotranspiración
+HD2	7	Humedad relativa mínima diaria	%	Humedad
+HD3	8	Hora de la humedad relativa mínima diaria	Mi	Humedad
+HD4	9	Humedad relativa máxima diaria	%	Humedad
+HD5	10	Hora de la humedad relativa máxima diaria	Mi	Humedad
+HI1	11	Humedad relativa del aire	%	Humedad
+HI2	12	Presión de vapor en HPA	hPa	Presión
+HI3	13	Temperatura del termómetro húmedo	ºC	Temperatura
+HI4	14	Temperatura del punto de rocío	ºC	Temperatura
+II1	15	Insolación registrada en el período INS	Mi	Radiación
+NI1	16			
+NI2	17			
+NI3	18	Cantidad de nubes bajas (entre el suelo y 2000 metros)	Oct	Nubosidad
+NI4	19			
+NI5	20			
+NI6	21	Nubosidad total	Oct	Nubosidad
+NI7	22			
+NI8	23			
+OD2	24	Presión máxima diaria	hPa	Presión
+OD3	25	Hora de la presión máxima diaria	Mi	Presión
+OD4	26	Presión mínima diaria	hPa	Presión
+OD5	27	Hora de la presión mínima diaria	Mi	Presión
+OI1	28	Presión atmosférica a nivel de la estación	hPa	Presión
+PD1	29	Precipitación total diaria de 7 a 7	mm	Precipitación
+PD10	30			
+PD11	31			
+PD12	32			
+PD13	33			
+PD14	34			
+PD15	35			
+PD16	36	Dir del viento en la intensidad de la precip máx diaria en 10 m	º	Viento
+PD17	37	Vel del viento en la intensidad de la precip max diaria en 10 m	km/h	Viento
+PD18	38	Intensidad de la precipitación máxima diaria en 20 minutos	mm/h	Precipitación
+PD19	39	Intensidad de la precipitación máxima diaria en 2 horas	mm/h	Precipitación
+PD2	40	Intensidad de la precipitación máxima diaria en 10 minutos	mm/h	Precipitación
+PD20	41	Intensidad de la precipitación máxima diaria en 6 horas	mm/h	Precipitación
+PD21	42	Intensidad de la precipitación máxima diaria en 12 horas	mm/h	Precipitación
+PD22	43	Dirección dominante del viento en el día de lluvia	º	Viento
+PD3	44	Hora de la precipitación máxima en 10 minutos	Mi	Precipitación
+PD4	45	Intensidad de la precipitación máxima diaria en 30 minutos	mm/h	Precipitación
+PD6	46	Intensidad de la precipitación máxima diaria en 60 minutos	mm/h	Precipitación
+PD8	47			
+PD9	48			
+PI1	49	Precipitación caída en el período	mm	Precipitación
+PI10	50	Nivel de nieve	mm	Precipitación
+PM1	51	Precipitación total mensual	mm	Precipitación
+RD22	52	Índice ultravioleta máximo	C	Radiación
+RI1	53	Radiación global en plano horizontal	W/m2	Radiación
+RI4	54	Radiación solar difusa	W/m2	Radiación
+RI5	55	Radiación ultravioleta UVB	mW/m2	Radiación
+SD10	56	Temperatura mínima diaria a 0.15 m sobre el suelo	ºC	Temperatura
+SI1	57	Temperatura del suelo a 0.05 m bajo el suelo	ºC	Temperatura
+SI2	58	Temperatura del suelo a 0.10 m bajo el suelo	ºC	Temperatura
+SI4	59	Temperatura del suelo a 0.20 m bajo el suelo	ºC	Temperatura
+TD2	60	Temperatura mínima diaria	ºC	Temperatura
+TD3	61	Hora de la temperatura mínima diaria	Mi	Temperatura
+TD4	62	Temperatura máxima diaria	ºC	Temperatura
+TD5	63	Hora de la temperatura máxima diaria	Mi	Temperatura
+TI1	64	Temperatura media del termómetro seco	ºC	Temperatura
+TI2	65	Temperatura mínima del termómetro seco	ºC	Temperatura
+TI3	66	Temperatura máxima del termómetro seco	ºC	Temperatura
+VD76	67	Dirección de la racha máxima de viento	º	Viento
+VD77	68	Racha máxima de viento	km/h	Viento
+VD78	69	Hora de la racha máxima de viento	Mi	Viento
+VI1	70	Dirección del viento	º	Viento
+VI10	71	Tiempo de dirección de viento en el 1er octante	Mi	Viento
+VI11	72	Tiempo de dirección de viento en el 2º octante	Mi	Viento
+VI12	73	Tiempo de dirección de viento en el 3er octante	Mi	Viento
+VI13	74	Tiempo de dirección de viento en el 4º octante	Mi	Viento
+VI14	75	Tiempo de dirección de viento en el 5º octante	Mi	Viento
+VI15	76	Tiempo de dirección de viento en el 6º octante	Mi	Viento
+VI16	77	Tiempo de dirección de viento en el 7º octante	Mi	Viento
+VI17	78	Tiempo de dirección de viento en el 8º octante	Mi	Viento
+VI2	79	Velocidad del viento	km/h	Viento
+VI3	80	Recorrido del viento en el período	km	Viento
+VI4	81	Dirección de la racha máxima	º	Viento
+VI5	82	Racha máxima del viento	km/h	Viento
+VI6	83	Tiempo de dirección de viento en el 1er cuadrante	Mi	Viento
+VI7	84	Tiempo de dirección de viento en el 2º cuadrante	Mi	Viento
+VI8	85	Tiempo de dirección de viento en el 3er cuadrante	Mi	Viento
+VI9	86	Tiempo de dirección de viento en el 4º cuadrante	Mi	Viento
