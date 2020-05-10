@@ -14,26 +14,26 @@ HI2	12	Presión de vapor en HPA	hPa	Presión
 HI3	13	Temperatura del termómetro húmedo	ºC	Temperatura
 HI4	14	Temperatura del punto de rocío	ºC	Temperatura
 II1	15	Insolación registrada en el período INS	Mi	Radiación
-NI1	16			
-NI2	17			
+NI1	16	Clase 1 de nubes bajas  (entre el suelo y 2000 metros)	-	Nubosidad
+NI2	17	Clase 2 de nubes bajas  (entre el suelo y 2000 metros)	-	Nubosidad
 NI3	18	Cantidad de nubes bajas (entre el suelo y 2000 metros)	Oct	Nubosidad
-NI4	19			
-NI5	20			
+NI4	19	Clase de nubes medias (entre 2000 y 6000 metros)	-	Nubosidad
+NI5	20	Clase de nubes altas (> 6000 metros)	-	Nubosidad
 NI6	21	Nubosidad total	Oct	Nubosidad
-NI7	22			
-NI8	23			
+NI7	22	Clase 2 de nubes medias (entre 2000 y 6000 m de altura)	-	Nubosidad
+NI8	23	Clase 2 de nubes altas (por encima de 6000 m de altura)	-	Nubosidad
 OD2	24	Presión máxima diaria	hPa	Presión
 OD3	25	Hora de la presión máxima diaria	Mi	Presión
 OD4	26	Presión mínima diaria	hPa	Presión
 OD5	27	Hora de la presión mínima diaria	Mi	Presión
 OI1	28	Presión atmosférica a nivel de la estación	hPa	Presión
 PD1	29	Precipitación total diaria de 7 a 7	mm	Precipitación
-PD10	30			
-PD11	31			
-PD12	32			
-PD13	33			
-PD14	34			
-PD15	35			
+PD10	30	Precipitación en forma de granizo en algún momento del día	-	Precipitación y otros Meteoros
+PD11	31	Precipitación en forma de tormenta en algún momento del día	-	Precipitación y otros Meteoros
+PD12	32	Existencia de niebla en algún momento del día	-	Precipitación y otros Meteoros
+PD13	33	Existencia de rocío en algún momento del día	-	Precipitación y otros Meteoros
+PD14	34	Existencia de escarcha en algún momento del día	-	Precipitación y otros Meteoros
+PD15	35	Nieve cubriendo el suelo en algún momento del día	-	Precipitación y otros Meteoros
 PD16	36	Dir del viento en la intensidad de la precip máx diaria en 10 m	º	Viento
 PD17	37	Vel del viento en la intensidad de la precip max diaria en 10 m	km/h	Viento
 PD18	38	Intensidad de la precipitación máxima diaria en 20 minutos	mm/h	Precipitación
@@ -45,8 +45,8 @@ PD22	43	Dirección dominante del viento en el día de lluvia	º	Viento
 PD3	44	Hora de la precipitación máxima en 10 minutos	Mi	Precipitación
 PD4	45	Intensidad de la precipitación máxima diaria en 30 minutos	mm/h	Precipitación
 PD6	46	Intensidad de la precipitación máxima diaria en 60 minutos	mm/h	Precipitación
-PD8	47			
-PD9	48			
+PD8	47	Precipitación en forma de lluvia en algún momento del día	-	Precipitación
+PD9	48	Precipitación en forma de nieve en algún momento del día	-	Precipitación
 PI1	49	Precipitación caída en el período	mm	Precipitación
 PI10	50	Nivel de nieve	mm	Precipitación
 PM1	51	Precipitación total mensual	mm	Precipitación

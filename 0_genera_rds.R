@@ -34,4 +34,4 @@ s <- cbind(s, st_coordinates(s)) %>%
   rename("lng" = "X", "lat" = "Y")
 
 s <- st_set_geometry(s, NULL)
-saveRDS(s, file = here::here("./inst/data/cn_stations_full.RDS"))
+saveRDS(s, file = here::here("./data/cn_stations_full.RDS"))
