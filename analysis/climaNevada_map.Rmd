@@ -1,0 +1,176 @@
+---
+title: "ClimaNevada Spatial Info v.0"
+output: 
+  flexdashboard::flex_dashboard:
+    theme: flatly
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library("flexdashboard")
+```
+
+```{r packages, include=FALSE, message=FALSE, warning=FALSE}
+library("flexdashboard")
+library("rgdal")
+library("leaflet") 
+library("raster")
+library("sp")
+library("sf")
+library("tidyverse")
+library("here")
+library("foreign")
+library("DT")
+
+machine <- 'ajpelu' 
+# machine <- 'ajpeluLap' 
+```
+
+
+```{r, message=FALSE}
+# stations 
+stations <- readRDS(here::here("./data/cn_stations_full.RDS"))
+net <- read_tsv(here::here("./data/cn_network.tsv"))
+variables <- read_tsv(here::here("./data/cn_variables.tsv"))
+
+
+stations_aux <- stations %>% 
+  mutate(record_start = as.Date(record_start, format = "%d/%m/%Y"),
+         record_end = as.Date(record_end, format = "%d/%m/%Y"), 
+         status = as.factor(status)) 
+
+s <- SpatialPointsDataFrame(coords = stations_aux[, c("lng", "lat")], data = stations_aux)
+proj4string(s) <- CRS("+init=epsg:4326")
+
+### --- Read limits of Sierra Nevada Protected area
+
+# sn <- st_read("/Users/ajpelu/Google Drive/_phd/_geoinfo/aux/sn_enp.shp", quiet=TRUE)
+# 
+# sn <- st_transform(sn, st_crs(s))
+
+
+enp <- readOGR(dsn="/Users/ajpelu/Google Drive/_phd/_geoinfo/aux/",
+               layer = 'sn_enp', encoding="UTF-8", verbose = FALSE)
+# # proj4string(enp) <- CRS("+init=epsg:23030")
+sn <- spTransform(enp, projection(s))
+# 
+# # Select Sierra Nevada 
+# sn <- subset(enp_r, NOMBRE == 'SIERRA NEVADA' & FIGURA == 'Espacio Natural')
+# sn_nat <- subset(enp_r, NOMBRE == 'SIERRA NEVADA' & FIGURA == 'Parque Nacional')
+```
+
+
+Distribution of Climate Stations
+=========================================
+
+```{r}
+# Extent of map 
+# Set spatial extent 
+myext <- extent(sn)
+
+popup_station <- paste0("<strong>Code:</strong> ", s@data$station_code,
+                        "<br><strong>Name:</strong> ", s@data$station_name,
+                        "<br><strong>Elevation:</strong> ",  s@data$elev,
+                        "<br><strong>Status:</strong> ",  s@data$status,
+                        "<br><strong>Start date:</strong> ",  s@data$record_start,
+                        "<br><strong>End date:</strong> ",  s@data$record_end,
+                        "<br><strong>Variables:</strong> ",  s@data$variables_code,
+                        "<br><strong>Network:</strong> ",  s@data$network_name
+                        )
+
+mipal <- colorFactor(palette = c("purple", "blue"), levels = levels(s@data$status))
+
+leaflet() %>%
+  fitBounds(myext@xmin, myext@ymin, myext@xmax, myext@ymax) %>% 
+  addWMSTiles('http://www.ideandalucia.es/wms/mdt_2005?',
+              layers = 'Sombreado_10',
+              options = WMSTileOptions(format = "image/png", transparent = TRUE),
+              attribution = '<a href="http://www.juntadeandalucia.es/institutodeestadisticaycartografia" target="_blank">Instituto de Estadística y Cartografía de Andalucía</a>', 
+              group = 'Hillshade') %>% 
+  addTiles(urlTemplate = "http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+           attribution = '<a href="https://carto.com/attributions">CARTO</a>',
+           group = 'Basemap') %>%
+  addProviderTiles("Esri.WorldImagery", group='Satellite') %>% 
+  addProviderTiles("HikeBike.HillShading", group='Hillshade2') %>% 
+  addLayersControl(position = 'bottomright',
+                   baseGroups = c("Hillshade", "Satellite", "Basemap"),
+                   overlayGroups = c('Natural Protected Area', 'Stations'),
+                   options = layersControlOptions(collapsed = FALSE)) %>% 
+  addPolylines(data=sn, color='red', 
+                group='Natural Protected Area', weight= 3) %>% 
+  addCircleMarkers(s@data,
+             lng=s@coords[,"lng"],
+             lat=s@coords[, "lat"], group = "Stations",
+             #color = ~ mipal(s@data$status),
+             radius = 6, stroke = FALSE, fillOpacity = 0.7, popup = popup_station) 
+``` 
+
+
+Metadata 
+=========================================
+
+Stations {.tabset}
+--------------------------------
+
+### Metadata Stations
+
+```{r}
+# Ojo añadir el url status ver escape en DT
+
+sdf <- stations_aux %>% 
+  dplyr::select(-station_id, -epsg, -munic_code, -province, -category, -type,
+                                      -cn_network_id, -station_variables_id, -network_code, -network_manager,
+                                      -network_status, -data_policy, -url, -lng, -lat)
+
+datatable(sdf, filter = 'top', 
+          extensions = 'Buttons', 
+          options = list(pageLength = 50, 
+                         autoWidth = TRUE,
+                         dom = 'Bfrtip',
+                         buttons = c('copy', 'csv', 'excel', 'pdf', 'print')
+                         )
+)
+
+```   
+ 
+### Variables
+    
+```{r}
+v <- variables %>% dplyr::select(-variable_id)
+
+datatable(v, filter = 'top', 
+          extensions = 'Buttons', 
+          options = list(pageLength = 50, 
+                         autoWidth = TRUE,
+                         dom = 'Bfrtip',
+                         buttons = c('copy', 'csv', 'excel', 'pdf', 'print')
+                         )
+)
+          
+```
+
+### Networks
+
+```{r}
+n <- net %>% 
+  mutate(urlT = ifelse(is.na(url), NA, paste0("<a href=", url, ' target="_blank">Link</a>'))) %>% 
+  dplyr::select(-network_id, -network_status, -data_policy, -url, url=urlT)
+
+target="_blank"
+
+datatable(n, filter = 'top', 
+          extensions = 'Buttons', 
+          escape = FALSE,
+          options = list(pageLength = 50, 
+                         autoWidth = TRUE,
+                         dom = 'Bfrtip',
+                         buttons = c('copy', 'csv', 'excel', 'pdf', 'print')
+                         )
+)
+  
+```
+
+
+
+ 

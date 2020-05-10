@@ -18,7 +18,23 @@ library("raster")
 ```
 
 
+
+
 ```{r}
+leaflet() %>% 
+#   fitBounds(myext@xmin, myext@ymin, myext@xmax, myext@ymax) %>% 
+  addProviderTiles("Esri.WorldImagery") %>% 
+    addCircleMarkers(stations, 
+                     lng = ~lng, 
+                     lat = ~lat, radius = 6, 
+                       stroke = FALSE, fillOpacity = 0.5)
+```
+
+
+
+```{r}
+# Read and prepare Data 
+
 # stations, network and variables
 stations <- read_tsv(here::here("./data/cn_stations.tsv"))
 net <- read_tsv(here::here("./data/cn_network.tsv"))
@@ -32,24 +48,19 @@ s <- stations %>%
 
 s <- cbind(s, st_coordinates(s)) %>% 
   rename("lng" = "X", "lat" = "Y") 
-  
 
-df <- s %>% st_drop_geometry()
+
+# Read SN limit 
+sn <- st_read("/Users/ajpelu/Google Drive/_phd/_geoinfo/aux/sn_enp.shp")
+sn <- st_transform(sn, 4326)
 ```
 
 
 
 
 
-```{r}
-m <- leaflet(df) %>% addTiles()
-
-    
-
-m %>% addMarkers(popup= ~paste("Hola mundo", size)) 
 
 
-```
 
 
 
@@ -70,17 +81,10 @@ sn_nat <- subset(enp_r, NOMBRE == 'SIERRA NEVADA' & FIGURA == 'Parque Nacional')
 
 ```
 
-
-
-
-
-
-### Distribution of Climate Stations
-
 ```{r}
 # Extent of map 
 # Set spatial extent 
-# myext <- extent(s)
+myext <- extent(s)
 
 # popup_station <- paste0("<strong>Code:</strong> ", s$station_code,
 #                         "<br><strong>Name:</strong> ", s$station_name,
@@ -91,6 +95,16 @@ sn_nat <- subset(enp_r, NOMBRE == 'SIERRA NEVADA' & FIGURA == 'Parque Nacional')
 #                         )
 
 
+```
+
+
+
+
+
+### Distribution of Climate Stations
+
+```{r}
+
 
 
 # mipal <- colorFactor(palette = c("purple", "blue"), levels = levels(sp_station@data$estado))
@@ -99,8 +113,21 @@ leaflet()
 #   fitBounds(myext@xmin, myext@ymin, myext@xmax, myext@ymax) %>% 
   addProviderTiles("Esri.WorldImagery")
 
-# %>% 
-  addCircleMarkers(s) 
+%>% addCircleMarkers(stations, 
+                     lng = stations$lng, 
+                     lat = stations$lat, radius = 6, 
+                       stroke = FALSE, fillOpacity = 0.5,
+                       popup = 
+                         as.character(tagList(
+                           tags$h4("Station Code: ", stations$station_code), tags$br(),
+                           sprintf("Station name: ", stations$station_name), tags$br(),
+                           sprintf("Status: ", stations$status), tags$br(),
+                           sprintf("Elevation: ", stations$elev), tags$br(),
+                           sprintf("Start date: ", stations$record_start), tags$br(),
+                           sprintf("Start end: ", stations$record_end), tags$br(),
+                           sprintf("Network: ", stations$network_name), tags$br(),
+                           sprintf("Variables: ", stations$variables_code)
+                         )))
 
 # %>%
 #   addCircleMarkers(sr_station@data,
